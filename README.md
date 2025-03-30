@@ -29,7 +29,7 @@ GeminiAPIを用いた対話実験及び実験データの記録を行います�
 ※利用にはAPI keyを入力する必要があります。
 
 ### １．初回利用前にHKs_ChatGPT_tester/user_config.json.sample に自分のAPI keyを入力し，ファイル名をuser_config.jsonに書き換えて保存して下さい。
-![タイトルなし](readme_images/8b3062c3-f417-4fa9-831e-092409d9ed28)
+![タイトルなし](readme_images/8b3062c3-f417-4fa9-831e-092409d9ed28.png)
 
 
 ### ２．requirements.txtのライブラリをインストールして下さい。
