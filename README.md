@@ -41,7 +41,7 @@ pip install -r requirements.txt
 
 ### ４．プロンプトまたはコマンドの数字を入力することでLLMからの返答や様々な機能を利用できます。
 
-![image](428371660-df3c23c9-7eaf-4e92-8b78-36e312a4ac7a.png)
+![image](readme_images/428371660-df3c23c9-7eaf-4e92-8b78-36e312a4ac7a.png)
 
 
 ## 【システムコマンドを使った操作】
@@ -60,7 +60,7 @@ pip install -r requirements.txt
 ### ・Save messages to Excel
 やり取りをエクセルファイルに保存します。保存先はuser_config.jsonで指定できます。（デフォルトではlog/sample.xlsxに保存されます）
 
-![image](readme_images/428372364-b5c531b3-5781-4ff8-984b-94e8eb3b5454.png)
+![image](readme_images/428373198-bc968e55-d0b2-4041-b362-09897ecbdbdc.png)
 
 ### ・Regenerate response：
 直前のプロンプトによる回答の生成をもう一度行います。
@@ -88,7 +88,7 @@ pip install -r requirements.txt
 prompt_preset.pyに登録したプロンプトのプリセットをプロンプトとして回答をリクエストします。
 登録されているプロンプトが一覧で表示されるので対応する数字を入力して選択してください。
 
-![image](readme_images/スクリーンショット 
+![image](readme_images/2025-03-30 144314.png) 
 
 ### ・Input message preset：
 prompt_preset.pyに登録したmessage（対話履歴）のプリセットをmessageとして回答をリクエストします。
@@ -102,6 +102,7 @@ prompt_preset.pyに登録したmessage（対話履歴）のプリセットをmes
 その他のオプションはuser_config.jsonファイルで管理します。
 初回利用時にGoogle API Keyを記入したuser_config.jsonの作成が必須です。
 user_config.json.sampleをコピーして作成することを推奨します。
+
 ![タイトルなし](readme_images/428371875-8b3062c3-f417-4fa9-831e-092409d9ed28.png)
 
 
