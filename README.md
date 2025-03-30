@@ -63,6 +63,8 @@ pip install -r requirements.txt
 
 ![image](readme_images/428372364-b5c531b3-5781-4ff8-984b-94e8eb3b5454.png)
 
+![image](readme_images/2025-03-30171343.png)
+
 ### ・Regenerate response：
 直前のプロンプトによる回答の生成をもう一度行います。
 
