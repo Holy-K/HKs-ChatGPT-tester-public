@@ -29,7 +29,7 @@ GeminiAPIを用いた対話実験及び実験データの記録を行います�
 ※利用にはAPI keyを入力する必要があります。
 
 ### １．初回利用前にHKs_ChatGPT_tester/user_config.json.sample に自分のAPI keyを入力し，ファイル名をuser_config.jsonに書き換えて保存して下さい。
-![タイトルなし](readme_images/8b3062c3-f417-4fa9-831e-092409d9ed28.png)
+![タイトルなし](readme_images/428371875-8b3062c3-f417-4fa9-831e-092409d9ed28.png)
 
 
 ### ２．requirements.txtのライブラリをインストールして下さい。
@@ -41,31 +41,31 @@ pip install -r requirements.txt
 
 ### ４．プロンプトまたはコマンドの数字を入力することでLLMからの返答や様々な機能を利用できます。
 
-![image](readme_images/df3c23c9-7eaf-4e92-8b78-36e312a4ac7a)
+![image](428371660-df3c23c9-7eaf-4e92-8b78-36e312a4ac7a.png)
 
 
 ## 【システムコマンドを使った操作】
 
 実行後最初に表示されるシステムコマンド（0~の数字）を入力するとコマンドに対応する動作が行われます。
 
-![image](readme_images/e4a36184-775a-4b81-b86c-a148852a8490)
+![image](readme_images/428371706-e4a36184-775a-4b81-b86c-a148852a8490.png)
 
 ### ・Exit：
 プログラムを終了することが出来ます。
 
 終了前に履歴を保存するか否かを選択できます。
 
-![image](readme_images/44187c02-be17-4282-9101-edc0fe8d74b1)
+![image](readme_images/428372335-44187c02-be17-4282-9101-edc0fe8d74b1.png)
 
 ### ・Save messages to Excel
 やり取りをエクセルファイルに保存します。保存先はuser_config.jsonで指定できます。（デフォルトではlog/sample.xlsxに保存されます）
 
-![image](readme_images/b5c531b3-5781-4ff8-984b-94e8eb3b5454)
+![image](readme_images/428372364-b5c531b3-5781-4ff8-984b-94e8eb3b5454.png)
 
 ### ・Regenerate response：
 直前のプロンプトによる回答の生成をもう一度行います。
 
-![image](readme_images/337fa70e-e75e-47a8-af41-476176101024)
+![image](readme_images/428372152-337fa70e-e75e-47a8-af41-476176101024.png)
 
 ### ・Show messages：
 回答の生成に用いたmessagesの全文を表示します。
@@ -75,13 +75,13 @@ pip install -r requirements.txt
 ### ・Show full response：
 生成されたresponseの全文を表示します。
 
-![image](readme_images/ece4ea34-1302-4ea1-a941-e9d71003dd58)
+![image](readme_images/428372517-ece4ea34-1302-4ea1-a941-e9d71003dd58.png)
 
 ### ・Input prompt with image：
 画像を入力することができます。
 
-![image](readme_images/310ae248-0902-4a3c-b039-c186b65a3661)
-![タイトルなし](readme_images/463f016d-6489-4603-a086-1335af58baad)
+![image](readme_images/428372836-310ae248-0902-4a3c-b039-c186b65a3661.png)
+![タイトルなし](readme_images/428372998-463f016d-6489-4603-a086-1335af58baad.png)
 
 
 ### ・Input prompt preset：
@@ -111,7 +111,7 @@ user_config.json.sampleをコピーして作成することを推奨します。
 それらを書き換えることで必要なプロンプトを登録できます。
 
 # クラス図（UML）
-![HKsHKs_ChatGPT_tester](readme_images/bac6bed6-5f9d-42bc-910f-b5d5bd29ac8b)
+![HKsHKs_ChatGPT_tester](readme_images/428338022-bac6bed6-5f9d-42bc-910f-b5d5bd29ac8b.svg)
 
 ## 動作環境：
 Windows11,python3.9.12
