@@ -1,3 +1,4 @@
+![Title](readme_images/HKs-ChatGPT-tester.png)
 # Hks-chatgpt-tester-public
 
 ## 注意
@@ -70,7 +71,7 @@ pip install -r requirements.txt
 ### ・Show messages：
 回答の生成に用いたmessagesの全文を表示します。
 
-![image](readme_images/2025-03-30141917)
+![image](readme_images/2025-03-30141917.png)
 
 ### ・Show full response：
 生成されたresponseの全文を表示します。
@@ -106,9 +107,9 @@ user_config.json.sampleをコピーして作成することを推奨します。
 ![タイトルなし](readme_images/428371875-8b3062c3-f417-4fa9-831e-092409d9ed28.png)
 
 
-## 【プロンプトプリセットの管理】
-プロンプトプリセットはprompt_preset.pyにまとめられています。
-それらを書き換えることで必要なプロンプトを登録できます。
+## 【プロンプト・メッセージプリセットの管理】
+プロンプトプリセットはsrc/config/prompt_preset.pyにまとめられています。
+それらを書き換えることでプロンプト・メッセージプリセットを管理できます。
 
 # クラス図（UML）
 ![HKsHKs_ChatGPT_tester](readme_images/428338022-bac6bed6-5f9d-42bc-910f-b5d5bd29ac8b.svg)
