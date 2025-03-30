@@ -29,7 +29,7 @@ GeminiAPIを用いた対話実験及び実験データの記録を行います�
 ※利用にはAPI keyを入力する必要があります。
 
 ### １．初回利用前にHKs_ChatGPT_tester/user_config.json.sample に自分のAPI keyを入力し，ファイル名をuser_config.jsonに書き換えて保存して下さい。
-![タイトルなし](https://github.com/user-attachments/assets/8b3062c3-f417-4fa9-831e-092409d9ed28)
+![タイトルなし](readme_images/8b3062c3-f417-4fa9-831e-092409d9ed28)
 
 
 ### ２．requirements.txtのライブラリをインストールして下さい。
@@ -41,61 +41,61 @@ pip install -r requirements.txt
 
 ### ４．プロンプトまたはコマンドの数字を入力することでLLMからの返答や様々な機能を利用できます。
 
-![image](https://github.com/user-attachments/assets/df3c23c9-7eaf-4e92-8b78-36e312a4ac7a)
+![image](readme_images/df3c23c9-7eaf-4e92-8b78-36e312a4ac7a)
 
 
 ## 【システムコマンドを使った操作】
 
 実行後最初に表示されるシステムコマンド（0~の数字）を入力するとコマンドに対応する動作が行われます。
 
-![image](https://github.com/user-attachments/assets/e4a36184-775a-4b81-b86c-a148852a8490)
+![image](readme_images/e4a36184-775a-4b81-b86c-a148852a8490)
 
 ### ・Exit：
 プログラムを終了することが出来ます。
 
 終了前に履歴を保存するか否かを選択できます。
 
-![image](https://github.com/user-attachments/assets/44187c02-be17-4282-9101-edc0fe8d74b1)
+![image](readme_images/44187c02-be17-4282-9101-edc0fe8d74b1)
 
 ### ・Save messages to Excel
 やり取りをエクセルファイルに保存します。保存先はuser_config.jsonで指定できます。（デフォルトではlog/sample.xlsxに保存されます）
 
-![image](https://github.com/user-attachments/assets/b5c531b3-5781-4ff8-984b-94e8eb3b5454)
+![image](readme_images/b5c531b3-5781-4ff8-984b-94e8eb3b5454)
 
 ### ・Regenerate response：
 直前のプロンプトによる回答の生成をもう一度行います。
 
-![image](https://github.com/user-attachments/assets/337fa70e-e75e-47a8-af41-476176101024)
+![image](readme_images/337fa70e-e75e-47a8-af41-476176101024)
 
 ### ・Show messages：
 回答の生成に用いたmessagesの全文を表示します。
 
-![image](https://github.com/user-attachments/assets/cf38f190-d636-46f8-aa18-e795cf5cc751)
+![image](readme_images/cf38f190-d636-46f8-aa18-e795cf5cc751)
 
 ### ・Show full response：
 生成されたresponseの全文を表示します。
 
-![image](https://github.com/user-attachments/assets/ece4ea34-1302-4ea1-a941-e9d71003dd58)
+![image](readme_images/ece4ea34-1302-4ea1-a941-e9d71003dd58)
 
 ### ・Input prompt with image：
 画像を入力することができます。
 
-![image](https://github.com/user-attachments/assets/310ae248-0902-4a3c-b039-c186b65a3661)
-![タイトルなし](https://github.com/user-attachments/assets/463f016d-6489-4603-a086-1335af58baad)
+![image](readme_images/310ae248-0902-4a3c-b039-c186b65a3661)
+![タイトルなし](readme_images/463f016d-6489-4603-a086-1335af58baad)
 
 
 ### ・Input prompt preset：
 prompt_preset.pyに登録したプロンプトのプリセットをプロンプトとして回答をリクエストします。
 登録されているプロンプトが一覧で表示されるので対応する数字を入力して選択してください。
 
-![image](https://github.com/user-attachments/assets/87ebe5ae-2ad4-402a-8499-4f70ff3e03df)
+![image](readme_images/87ebe5ae-2ad4-402a-8499-4f70ff3e03df)
 
 
 ### ・Input message preset：
 prompt_preset.pyに登録したmessage（対話履歴）のプリセットをmessageとして回答をリクエストします。
 登録されているmessageが一覧で表示されるので対応する数字を入力して選択してください。
 
-![image](https://github.com/user-attachments/assets/bc968e55-d0b2-4041-b362-09897ecbdbdc)
+![image](readme_images/bc968e55-d0b2-4041-b362-09897ecbdbdc)
 
 
 
@@ -103,7 +103,7 @@ prompt_preset.pyに登録したmessage（対話履歴）のプリセットをmes
 その他のオプションはuser_config.jsonファイルで管理します。
 初回利用時にGoogle API Keyを記入したuser_config.jsonの作成が必須です。
 user_config.json.sampleをコピーして作成することを推奨します。
-![タイトルなし](https://github.com/user-attachments/assets/8b3062c3-f417-4fa9-831e-092409d9ed28)
+![タイトルなし](readme_images/8b3062c3-f417-4fa9-831e-092409d9ed28)
 
 
 ## 【プロンプトプリセットの管理】
@@ -111,7 +111,7 @@ user_config.json.sampleをコピーして作成することを推奨します。
 それらを書き換えることで必要なプロンプトを登録できます。
 
 # クラス図（UML）
-![HKsHKs_ChatGPT_tester](https://github.com/user-attachments/assets/bac6bed6-5f9d-42bc-910f-b5d5bd29ac8b)
+![HKsHKs_ChatGPT_tester](readme_images/bac6bed6-5f9d-42bc-910f-b5d5bd29ac8b)
 
 ## 動作環境：
 Windows11,python3.9.12
