@@ -1,0 +1,7 @@
+{
+    "GOOGLE_API_KEY":"YOUR_API_KEY",
+    "LLM_MODEL": "gemini-2.0-flash",
+    "LLM_TEMPERATURE": 1,
+    "PATH_LOG_EXCELFILE": "log/sample.xlsx",
+    "INITIAL_IMAGE_DIRECTORY":"images"
+}

@@ -1,0 +1,248 @@
+@startuml
+class ClassDiagramGenerator {
+  __init__()
+  parse_python_file()
+  find_python_files()
+  generate_plantuml()
+  run()
+}
+class Dependency {
+  __init__()
+  bind_config()
+  resolve()
+}
+IDependency <|-- Dependency
+class DependencyGemini {
+  __init__()
+  bind_config()
+  resolve()
+}
+IDependency <|-- DependencyGemini
+class IDependency {
+  __init__()
+  bind_config()
+  resolve()
+}
+ABC <|-- IDependency
+class IPromptPresets {
+  __init__()
+}
+ABC <|-- IPromptPresets
+class ISettings {
+  __init__()
+}
+ABC <|-- ISettings
+class PromptPresets {
+  __init__()
+}
+IPromptPresets <|-- PromptPresets
+class SettingsFromUserConfigJson {
+  __init__()
+  display_all_settings()
+  get_openai_api_key()
+  set_openai_api_key()
+  get_LLM_model()
+  set_LLM_model()
+  get_LLM_temperature()
+  set_LLM_temperature()
+  get_path_log_excel_file()
+  set_path_log_excel_file()
+  get_on_sound_notification()
+  set_on_sound_notification()
+  get_path_sound_notification()
+  set_path_sound_notification()
+  get_LLM_max_tokens()
+  set_LLM_max_tokens()
+  get_initial_image_directory()
+  get_google_api_key()
+}
+ISettings <|-- SettingsFromUserConfigJson
+class ChatGPTTester {
+  __init__()
+  _start_chatGPT_tester()
+}
+class ChatCommandProcessor {
+  __init__()
+  conversation_loop()
+  _handle_command_input()
+  _execute_command()
+  _normal_process()
+  _exit_program()
+  _ask_save_logs2excel()
+  _regenerate_response()
+  _show_messages()
+  _show_full_response()
+  _show_RAP_table()
+  _input_with_image()
+  _input_prompt_preset()
+  _input_message_preset()
+}
+class IChatCommandProcessor {
+  __init__()
+  _nomal_process()
+}
+ABC <|-- IChatCommandProcessor
+class ILLMView {
+}
+ABC <|-- ILLMView
+class LLMView {
+  print_startup_message()
+  print_LLM_text()
+  print_turnBar()
+}
+ILLMView <|-- LLMView
+class IStatusController {
+  __init__()
+  _set_status_package()
+  update_status_every_turn_end()
+  update_status_end()
+  create_log_entry()
+  record_log()
+  _ask_save_logs2excel()
+}
+ABC <|-- IStatusController
+class IStatusPackage {
+  __init__()
+}
+ABC <|-- IStatusPackage
+class StatusControllerRAP {
+  __init__()
+  update_status_every_turn()
+  update_status_end()
+  clear_status()
+}
+StatusControllerStandard <|-- StatusControllerRAP
+class StatusControllerStandard {
+  __init__()
+  _set_status_package()
+  update_status_every_turn_end()
+  update_status_end()
+  create_log_entry()
+  update_status_settings()
+  record_log()
+  save_messages2excel()
+  ask_save_logs2excel()
+}
+IStatusController <|-- StatusControllerStandard
+class StatusGPTRobotPlanning {
+  __init__()
+  get_first_prompt()
+  set_first_prompt()
+  get_command()
+  set_command()
+  get_question()
+  set_question()
+  get_number_of_questions()
+  set_number_of_questions()
+  get_answer()
+  set_answer()
+  get_number_of_answers()
+  set_number_of_answers()
+  get_count_words_answers()
+  set_count_words_answers()
+  get_total_number_of_answers()
+  set_total_number_of_answers()
+  get_number_of_invalid_answers()
+  set_number_of_invalid_answers()
+  get_percent_of_invalid_answers()
+  set_percent_of_invalid_answers()
+}
+class StatusPackageRAP {
+  __init__()
+}
+class StatusPackageStandard {
+  __init__()
+}
+IStatusPackage <|-- StatusPackageStandard
+class StatusRAP {
+  __init__()
+  get_RAP()
+  set_RAP()
+  get_number_of_items_of_RAP()
+  set_number_of_items_of_RAP()
+  get_number_of_items_of_complete_RAP()
+  set_number_of_items_of_complete_RAP()
+  get_count_JSONDecodeError()
+  set_count_JSONDecodeError()
+}
+class StatusStandard {
+  __init__()
+  get_date()
+  set_date()
+  get_messages()
+  set_messages()
+  add_response2messages()
+  get_LLM_model()
+  set_LLM_model()
+  get_temperature()
+  set_temperature()
+  get_turn()
+  set_turn()
+  increase_turn()
+  get_prompt()
+  set_prompt()
+  get_answer_text()
+  set_answer_text()
+  get_detailed_response()
+  set_detailed_response()
+  get_prompt_tokens()
+  set_prompt_tokens()
+  get_answer_text_tokens()
+  set_answer_test_tokens()
+  get_total_tokens()
+  set_total_tokens()
+  get_path_input_image()
+  set_path_input_image()
+  get_response_time()
+  set_response_time()
+}
+class ChatGPTClient {
+  __init__()
+  update_settings()
+  extract_answer_text_from_response()
+  extract_prompt_tokens_from_response()
+  extract_answer_text_tokens_from_response()
+  extract_total_tokens_from_response()
+  request_LLM()
+  talk_LLM()
+  talk_LLM_history_reset4RAP()
+  select_file()
+  _encode_image()
+  talk_LLM_vision()
+  talk_LLM_vision_multiple()
+}
+ILLMClient <|-- ChatGPTClient
+class GeminiClient {
+  __init__()
+  extract_answer_text_from_response()
+  extract_prompt_tokens_from_response()
+  extract_answer_text_tokens_from_response()
+  extract_total_tokens_from_response()
+  update_settings()
+  request_LLM()
+  talk_LLM()
+  select_file()
+  _encode_image()
+  talk_LLM_vision_multiple()
+}
+ILLMClient <|-- GeminiClient
+class ILLMClient {
+  __init__()
+  update_settings()
+  extract_answer_text_from_response()
+  extract_prompt_tokens_from_response()
+  extract_answer_text_tokens_from_response()
+  extract_total_tokens_from_response()
+  request_LLM()
+  talk_LLM()
+}
+ABC <|-- ILLMClient
+class PrintThreadIconLoading {
+  __init__()
+  start()
+  _animate()
+  __enter__()
+  stop()
+  __exit__()
+}
+@enduml

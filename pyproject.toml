@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "HKs_ChatGPT_tester"
+version = "0.1.0"
+authors = [
+    {name = "堀 和希", email = "horikazuki28@akane.waseda.jp"},
+]
+description = "ChatGPTAPIを用いた実験自動化ツール"
+requires-python = ">=3.7"

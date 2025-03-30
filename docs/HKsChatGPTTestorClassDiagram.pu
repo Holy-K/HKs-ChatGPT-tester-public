@@ -1,0 +1,185 @@
+@startuml HKsHKs_ChatGPT_tester
+package src{
+    package core{
+        class ChatGPTTester {
+            - settings: ISettings
+            - promptPresets: IPromptPresets
+            - lLMClient: ILLMClient
+            - statusController: IStatusController
+            - chatCommandProcessor: IChatCommandProcessor
+            - tester_mode: str
+            + __init__(settings: ISettings, promptPresets: IPromptPresets, lLMClient: ILLMClient, statusController: IStatusController, chatCommandProcessor: IChatCommandProcessor)
+            - _start_chatGPT_tester()
+            - _display_startup_message()
+        }
+        enum TesterMode {
+        Standard
+        Exit
+        }
+        interface IChatCommandProcessor{
+            - _normal_process (prompt):None
+        }
+        class ChatCommandProcessor implements IChatCommandProcessor{
+            - statusController: IStatusController
+            - settings: ISettings
+            - promptPresets: IPromptPresets
+            - lLMClient: ILLMClient
+            - lLMView: ILLMTesterView
+            - dict_command: dict
+            - order_dict_command: list
+            + __init__(statusController: IStatusController, settings: ISettings, promptPresets: IPromptPresets, lLMClient: ILLMClient, lLMView:ILLMTesterView)
+            + conversation_loop(): str
+            - _handle_command_input(input_text: str)
+            - _execute_command(command: str)
+            - _normal_process(prompt: str, messages: list)
+            - _exit_program()
+            - _ask_save_logs2excel()
+            - _regenerate_response()
+            - _show_messages()
+            - _show_full_response()
+            - _input_with_image()
+            - _input_prompt_preset()
+            - _input_message_preset()
+        }
+
+        interface ILLMTesterView
+        class LLMTesterView implements ILLMTesterView{
+            + print_startup_message(settings:ISettings,dict_command:dict):None
+            + print_LLM_text(lLM_text,settings:ISettings, color_chatgpt="\033[32m", END='\033[0m'):None
+        }
+
+        ChatGPTTester "1" *-- "1" IChatCommandProcessor
+        ChatGPTTester "1" *-- "1" src.config.ISettings
+        ChatGPTTester "1" *-- "1" src.config.IPromptPreset
+        ChatGPTTester "1" *-- "1" src.config.IDependency
+        ChatGPTTester "1" o--"1" src.services.ILLMClient
+        ChatGPTTester "1" *-- "1" status.IStatusController
+        ChatGPTTester .. TesterMode
+        ChatCommandProcessor "1" *-- "1" status.IStatusController
+        ChatCommandProcessor ..> src.config.ISettings :Load
+        ChatCommandProcessor ..> src.config.IPromptPreset:Load
+        ChatCommandProcessor "1" o--"1" src.services.ILLMClient
+        ChatCommandProcessor "1" *-- "1" src.core.ILLMTesterView
+        LLMTesterView ..> src.config.ISettings :Load
+
+
+        package status{
+            interface IStatusPackage{
+                StatusStandard statusStandard
+            }
+            class StatusPackageStandard implements IStatusPackage
+            class StatusStandard{
+                - messages:list
+                - LLM_model: str
+                - temperature: float
+                - turn :int
+                - prompt: str
+                - answer_text: str
+                - detailed_response: dict
+                - prompt_tokens: int
+                - answer_text_tokens:int
+                - total_tokens: int
+                - path_input_image: str
+                - response_time: float
+                - date: datetime
+            }
+
+
+            interface IStatusController{
+            + __init__(settings: ISettings,statusPackage:IStatusPackage,lLMClient:ILLMClient)
+            + processing_at_end_of_turn(prompt:str, response:dict, messages:list, path_input_image:str, response_time:float):None
+            - _update_status_every_turn_end():None
+            - _update_status_after_record_log():None
+            + update_status_end():None
+            - _create_log_entry(): dict
+            - _record_log():None
+            + save_messages2excel(file_path: str):None
+            + ask_save_logs2excel(file_path: str):None
+            + update_status_settings(settings:ISettings):None
+            }
+            class StatusControllerStandard implements IStatusController{
+                - statusPackage:IStatusPackage
+                - lLMClient:ILLMClient
+                - logs: list
+                - _set_status_package(statusPackage:IStatusPackage):None
+            }
+            StatusControllerStandard "1" *-- "1" IStatusPackage
+            StatusControllerStandard ..> src.utils.SaveDictArrayToExcel :Use
+            StatusControllerStandard ..>  src.utils.SaveJson2Excel:Use
+            StatusPackageStandard "1" *-- "1" StatusStandard
+    }
+
+    package src.config{
+        interface IDependency
+        note left
+        DIコンテナ
+        end note
+        class Dependency implements IDependency
+        class DependencyGemini implements IDependency
+        interface ISettings{
+        }
+        class SettingsFromUserConfigJson implements ISettings{
+            - openai_api_key: str
+            - google_api_key:str
+            - LLM_model: str
+            - LLM_temperature: float
+            - LLM_max_tokens: int
+            - path_log_excel_file: str
+            - on_sound_notification: bool
+            - path_sound_notification: str
+            - initial_image_directory: str
+            + __init__(config_path:str)
+            + display_all_settings()
+        }
+        interface IPromptPreset{}
+        class PromptPreset implements IPromptPreset{
+            - prompt_presets:list
+            - message_presets:list
+        }
+    }
+
+    package src.services{
+        interface ILLMClient{
+            - settings: ISettings
+            + __init__(settings: ISettings)
+            + update_settings(settings: ISettings):None
+            + request_LLM(messages:list): dict
+            + talk_LLM(prompt:str, messages:list): tuple[str, list]
+            + extract_answer_text_from_response(response:dict):str
+            + extract_prompt_tokens_from_response(response:dict):int
+            + extract_answer_text_tokens_from_response(response:dict):int
+            + extract_total_tokens_from_response(response:dict):int
+        }
+        class ChatGPTClient implements ILLMClient{
+            + select_file(path_initial_dir:str):str
+            - _encode_image(image_path:str):str
+        }
+        class GeminiClient implements ILLMClient{
+            + select_file(path_initial_dir:str):str
+            - _encode_image(image_path:str):str
+        }
+
+        ChatGPTClient ..> src.config.ISettings:Load
+        ChatGPTClient ..> src.utils.PrintThreadIconLoading:Use
+        GeminiClient ..> src.config.ISettings:Load
+        GeminiClient ..> src.utils.ExtractTextBetweenStrings:Use
+    }
+
+    package src.utils{
+        class ExtractTextBetweenStrings{
+            + extract_answer_text_between_strings(text: str, start_string: str, end_string: str): str
+        }
+        class PrintThreadIconLoading{
+            + __init__(desc: str="Loading...", end: str="Done!", timeout: float=0.1)
+            + start()
+            + stop()
+        }
+        class SaveDictArrayToExcel{
+            + save_dict_array_to_excel(dict_array: list, filename: str)
+        }
+        class SaveJson2Excel{
+            + save_dict_array_to_json(dict_array: list, filename: str)
+        }
+    }
+}
+@enduml

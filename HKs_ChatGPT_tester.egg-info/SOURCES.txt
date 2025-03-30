@@ -1,0 +1,7 @@
+README.md
+pyproject.toml
+setup.py
+HKs_ChatGPT_tester.egg-info/PKG-INFO
+HKs_ChatGPT_tester.egg-info/SOURCES.txt
+HKs_ChatGPT_tester.egg-info/dependency_links.txt
+HKs_ChatGPT_tester.egg-info/top_level.txt
