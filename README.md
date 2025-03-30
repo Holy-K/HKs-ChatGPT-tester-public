@@ -60,7 +60,7 @@ pip install -r requirements.txt
 ### ・Save messages to Excel
 やり取りをエクセルファイルに保存します。保存先はuser_config.jsonで指定できます。（デフォルトではlog/sample.xlsxに保存されます）
 
-![image](readme_images/428373198-bc968e55-d0b2-4041-b362-09897ecbdbdc.png)
+![image](readme_images/428372364-b5c531b3-5781-4ff8-984b-94e8eb3b5454.png)
 
 ### ・Regenerate response：
 直前のプロンプトによる回答の生成をもう一度行います。
@@ -70,7 +70,7 @@ pip install -r requirements.txt
 ### ・Show messages：
 回答の生成に用いたmessagesの全文を表示します。
 
-![image](readme_images/2025-03-30 141917)
+![image](readme_images/2025-03-30141917)
 
 ### ・Show full response：
 生成されたresponseの全文を表示します。
@@ -88,7 +88,7 @@ pip install -r requirements.txt
 prompt_preset.pyに登録したプロンプトのプリセットをプロンプトとして回答をリクエストします。
 登録されているプロンプトが一覧で表示されるので対応する数字を入力して選択してください。
 
-![image](readme_images/2025-03-30 144314.png) 
+![image](readme_images/2025-03-30144314.png) 
 
 ### ・Input message preset：
 prompt_preset.pyに登録したmessage（対話履歴）のプリセットをmessageとして回答をリクエストします。
