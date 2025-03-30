@@ -70,7 +70,7 @@ pip install -r requirements.txt
 ### ・Show messages：
 回答の生成に用いたmessagesの全文を表示します。
 
-![image](readme_images/cf38f190-d636-46f8-aa18-e795cf5cc751)
+![image](readme_images/2025-03-30 141917)
 
 ### ・Show full response：
 生成されたresponseの全文を表示します。
@@ -88,14 +88,13 @@ pip install -r requirements.txt
 prompt_preset.pyに登録したプロンプトのプリセットをプロンプトとして回答をリクエストします。
 登録されているプロンプトが一覧で表示されるので対応する数字を入力して選択してください。
 
-![image](readme_images/87ebe5ae-2ad4-402a-8499-4f70ff3e03df)
-
+![image](readme_images/スクリーンショット 
 
 ### ・Input message preset：
 prompt_preset.pyに登録したmessage（対話履歴）のプリセットをmessageとして回答をリクエストします。
 登録されているmessageが一覧で表示されるので対応する数字を入力して選択してください。
 
-![image](readme_images/bc968e55-d0b2-4041-b362-09897ecbdbdc)
+![image](readme_images/428373198-bc968e55-d0b2-4041-b362-09897ecbdbdc.png)
 
 
 
@@ -103,7 +102,7 @@ prompt_preset.pyに登録したmessage（対話履歴）のプリセットをmes
 その他のオプションはuser_config.jsonファイルで管理します。
 初回利用時にGoogle API Keyを記入したuser_config.jsonの作成が必須です。
 user_config.json.sampleをコピーして作成することを推奨します。
-![タイトルなし](readme_images/8b3062c3-f417-4fa9-831e-092409d9ed28)
+![タイトルなし](readme_images/428371875-8b3062c3-f417-4fa9-831e-092409d9ed28.png)
 
 
 ## 【プロンプトプリセットの管理】
