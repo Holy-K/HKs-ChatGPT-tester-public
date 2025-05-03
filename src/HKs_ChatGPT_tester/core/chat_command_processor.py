@@ -9,8 +9,8 @@ import datetime
 # --------------------------------------------------------------------
 # 自前ファイル--------------------------------------------------------
 from .status.i_status_controller import IStatusController
-from .i_LLM_view import ILLMView
-from ..services.i_LLM_client import ILLMClient
+from .i_llm_view import ILlmView
+from ..services.i_llm_client import ILlmClient
 from ..config.i_prompt_presets import IPromptPresets
 from ..config.i_settings import ISettings
 # --------------------------------------------------------------------
@@ -20,16 +20,16 @@ class ChatCommandProcessor():
         self,
         statusController:IStatusController,
         settings:ISettings,
-        lLMClient:ILLMClient,
-        lLMView:ILLMView,
+        llmClient:ILlmClient,
+        llmView:ILlmView,
         promptPresets:IPromptPresets=None,
         ):
         self.statusController = statusController
         self.settings = settings
         if promptPresets:
             self.promptPresets = promptPresets
-        self.LLMClient = lLMClient
-        self.lLMView =lLMView
+        self.llmClient = llmClient
+        self.lLMView =llmView
         self.dict_command = {
             "COMMAND_EXIT": ["Exit", self._exit_program],
             "COMMAND_SAVE_MESSAGES_TO_EXCEL": ["Save messages to Excel", self._ask_save_logs2excel],
@@ -48,12 +48,13 @@ class ChatCommandProcessor():
             self.lLMView.print_turnBar(self.statusController.statusPackage.statusStandard.get_turn())
             print("【You】")
             input_text = input()
-            try:
-                self._handle_command_input(input_text)
-            except Exception as e:
-                print("\033[31m" + "Error: " + str(e) + '\033[0m')
-                print("Error is occurred in conversation_loop()")
-                self._ask_save_logs2excel()
+            self._handle_command_input(input_text)#TODOデバッグが終わったら戻す
+            # try:
+            #     self._handle_command_input(input_text)
+            # except Exception as e:
+            #     print("\033[31m" + "Error: " + str(e) + '\033[0m')
+            #     print("Error is occurred in conversation_loop()")
+            #     self._ask_save_logs2excel()
         return self.tester_mode_change
 
     def _handle_command_input(self, input_text):
@@ -89,16 +90,16 @@ class ChatCommandProcessor():
             messages = self.statusController.statusPackage.statusStandard.get_messages()
         time = datetime.datetime.now()
         if self.statusController.statusPackage.statusStandard.get_path_input_image() in [None,'']:
-            response, messages = self.LLMClient.talk_LLM(prompt, messages,)
+            response, messages = self.llmClient.talk_llm(prompt, messages,)
         else:
-            response, messages = self.LLMClient.talk_LLM_vision_multiple(
+            response, messages = self.llmClient.talk_llm_vision_multiple(
                         prompt,
                         messages,
                         [self.statusController.statusPackage.statusStandard.get_path_input_image()],
 
                     )
         response_time = datetime.datetime.now() - time
-        self.lLMView.print_LLM_text(self.LLMClient.extract_answer_text_from_response(response),self.settings)
+        self.lLMView.print_llm_text(self.llmClient.extract_answer_text_from_response(response),self.settings)
         self.statusController.processing_at_end_of_turn(prompt, response, messages,response_time = response_time)
 
     # =============================================================================
@@ -114,19 +115,20 @@ class ChatCommandProcessor():
 
     # ログをExcelに保存するかどうかを確認する関数
     def _ask_save_logs2excel(self):
-        self.statusController.ask_save_logs2excel(self.settings.get_path_log_excel_file())
+        datetime = self.statusController.statusPackage.statusStandard.get_date_time()
+        self.statusController.ask_save_logs2excel(self.settings.get_path_log_excel_file(),datetime)
 
     # レスポンスを再生成する関数
     def _regenerate_response(self):
         if len(self.statusController.statusPackage.statusStandard.get_messages()) >= 2:
             del self.statusController.statusPackage.statusStandard.messages[-2]
             time = datetime.datetime.now()
-            response, messages = self.LLMClient.talk_LLM(
+            response, messages = self.llmClient.talk_llm(
                 self.statusController.statusPackage.statusStandard.get_prompt(),
                 self.statusController.statusPackage.statusStandard.get_messages(),
             )
             response_time = datetime.datetime.now() - time
-            self.lLMView.print_LLM_text(self.LLMClient.extract_answer_text_from_response(response),self.settings)
+            self.lLMView.print_llm_text(self.llmClient.extract_answer_text_from_response(response),self.settings)
             self.statusController.processing_at_end_of_turn(response = response, messages = messages, response_time = response_time)
         else:
             print("\033[31m"+"Error: There are no message."+'\033[0m')
@@ -143,7 +145,7 @@ class ChatCommandProcessor():
     def _input_with_image(self):
         while True:
             path_initial_image_directory = self.settings.get_initial_image_directory()
-            path_input_image=self.LLMClient.select_file(path_initial_image_directory)
+            path_input_image=self.llmClient.select_file(path_initial_image_directory)
             if path_input_image=="":
                 print("\033[31m"+"Error!!"+'\033[0m',"File not selected. Would you like to retry selecting the file?(y/n)")
                 while True:

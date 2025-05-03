@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from httpx import request
 from ..config.i_settings import ISettings
 
-class ILLMClient(ABC):
+class ILlmClient(ABC):
     @abstractmethod
     def __init__(self)->None:
         pass
@@ -25,9 +25,9 @@ class ILLMClient(ABC):
     def extract_total_tokens_from_response(self, response) -> int:
         pass
     @abstractmethod
-    def request_LLM(self, messages:list):
+    def request_llm(self, messages:list):
         pass
 
     @abstractmethod
-    def talk_LLM(self, prompt = None, messages:list = [])-> tuple[str, list]:
+    def talk_llm(self, prompt = None, messages:list = [])-> tuple[str, list]:
         pass

@@ -1,6 +1,8 @@
+**/__pycache__/
 .venv
 log
 log/sample.xlsx
 my_log/
 src/HKs_ChatGPT_tester/code/config/prompt_presets.py
 src/HKs_ChatGPT_tester/user_config.json
+*.egg-info

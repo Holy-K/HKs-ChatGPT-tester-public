@@ -4,5 +4,5 @@ class IChatCommandProcessor(ABC):
     @abstractmethod
     def __init__(self):
         pass
-    def _nomal_process(prompt:str):
+    def _normal_process(prompt:str):
         pass

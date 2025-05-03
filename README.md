@@ -2,7 +2,7 @@
 # Hks-chatgpt-tester-public
 
 ## 注意
-研究室内で使用しているLLMを用いた実験ツールの就活用限定公開版です。
+研究室内で使用している大規模言語モデル（LLM）を用いた実験ツールの就活用限定公開版です。
 
 <span style="color:red; text-decoration:underline;">使用にはGoogle API Keyを記入したuser_config.jsonの作成が必須です。</span>
 
@@ -17,12 +17,12 @@ gemini-2.0-flash をはじめとする一部のLLMモデルは無料で使用が
 
 本構成は本来のおよそ3分の１程度の大きさです。
 
-本構成ではGeminiモデルでのみ使用可能ですが、本来の構成では複数社のAPIに対応しています。
+本構成ではGeminiAPIとChatGPT APIのみ使用可能ですが、本来の構成では複数社のAPIに対応しています。
 
 ## 概要
-GeminiAPIを用いた対話実験及び実験データの記録を行います。
+LLMを用いた対話実験及び実験データの記録を行います。
 
-実験データは指定のExcellファイルに表として保存されます。（デフォルトではlog/sample.xlsxに保存されます）
+実験データは指定のExcelファイルに表として保存されます。（デフォルトではlog/sample.xlsxに保存されます）
 
 複数枚の画像入力にも対応しています。
 
@@ -38,7 +38,11 @@ GeminiAPIを用いた対話実験及び実験データの記録を行います�
 pip install -r requirements.txt
 ```
 
-### ３．run.pyを実行して下さい。
+### ３．run_gemini.pyまたは３．run_chatgpt.pyを実行して下さい。
+
+user_config.jsonのLLM_MODELにGeminiモデル（例：gemini-2.0-flash）を入力している場合は、run_gemini.pyを実行してください。
+
+user_config.jsonのLLM_MODELにOpenAIモデル（例：gpt-4o）を入力している場合は、run_chatgpt.pyを実行してください。
 
 ### ４．プロンプトまたはコマンドの数字を入力することでLLMからの返答や様々な機能を利用できます。
 
@@ -91,7 +95,7 @@ pip install -r requirements.txt
 prompt_preset.pyに登録したプロンプトのプリセットをプロンプトとして回答をリクエストします。
 登録されているプロンプトが一覧で表示されるので対応する数字を入力して選択してください。
 
-![image](readme_images/2025-03-30144314.png) 
+![image](readme_images/2025-03-30144314.png)
 
 ### ・Input message preset：
 prompt_preset.pyに登録したmessage（対話履歴）のプリセットをmessageとして回答をリクエストします。
@@ -114,7 +118,7 @@ user_config.json.sampleをコピーして作成することを推奨します。
 それらを書き換えることでプロンプト・メッセージプリセットを管理できます。
 
 # クラス図（UML）
-![HKsHKs_ChatGPT_tester](readme_images/428338022-bac6bed6-5f9d-42bc-910f-b5d5bd29ac8b.svg)
+![HKsHKs_ChatGPT_tester](readme_images/hks_chatgpt_tester_class_diagram.svg)
 
 ## 動作環境：
 Windows11,python3.9.12

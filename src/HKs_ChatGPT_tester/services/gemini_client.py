@@ -25,12 +25,12 @@ from pyexpat import model
 
 # --------------------------------------------------------------------
 # 自前ファイル--------------------------------------------------------
-from ..services.i_LLM_client import ILLMClient
+from .i_llm_client import ILlmClient
 from ..utils.print_thread_icon_loading import PrintThreadIconLoading
 from ..config.i_settings import ISettings
 # ---------------------------------------------------------------------
 
-class GeminiClient(ILLMClient):
+class GeminiClient(ILlmClient):
     @inject
     def __init__(self,settings:ISettings)->None:
         self.update_settings(settings)
@@ -54,23 +54,23 @@ class GeminiClient(ILLMClient):
     def update_settings(self,settings:ISettings)->None:
         self.settings = settings
         genai.configure(api_key = self.settings.get_google_api_key())
-        self.model = genai.GenerativeModel(model_name = settings.get_LLM_model())
-        self.temperature = settings.get_LLM_temperature()
-        self.max_output_tokens = settings.get_LLM_max_tokens()
+        self.model = genai.GenerativeModel(model_name = settings.get_llm_model())
+        self.temperature = settings.get_llm_temperature()
+        self.max_output_tokens = settings.get_llm_max_tokens()
         self.config = {
-            "temperature": self.settings.get_LLM_temperature(),
-            "max_output_tokens": self.settings.get_LLM_max_tokens(),
+            "temperature": self.settings.get_llm_temperature(),
+            "max_output_tokens": self.settings.get_llm_max_tokens(),
         }
-    def request_LLM(self, messages:list):
-        with PrintThreadIconLoading(("Waiting ",self.settings.get_LLM_model(),"'s response..."),""):
+    def request_llm(self, messages:list):
+        with PrintThreadIconLoading(("Waiting ",self.settings.get_llm_model(),"'s response..."),""):
             response = self.model.generate_content(messages, generation_config=self.config)
         return response
 
-    def talk_LLM(self, prompt = None, messages:list = [])-> tuple[str, list]:
+    def talk_llm(self, prompt = None, messages:list = [])-> tuple[str, list]:
         if prompt:
             messages.append({'role':'user','parts': prompt})
-        with PrintThreadIconLoading(("Waiting ",self.settings.get_LLM_model(),"'s response..."),""):
-            response = self.request_LLM(messages)
+        with PrintThreadIconLoading(("Waiting ",self.settings.get_llm_model(),"'s response..."),""):
+            response = self.request_llm(messages)
             messages.append({'role':'assistant','parts': self.extract_answer_text_from_response(response)})
         return response, messages
 
@@ -86,9 +86,9 @@ class GeminiClient(ILLMClient):
         with open(image_path, "rb") as image_file:
             return base64.b64encode(image_file.read()).decode('utf-8')
 
-    def talk_LLM_vision_multiple(self, prompt:str = None, messages:list = [], file_pathes:list = []) -> tuple[str, list]:
-        if isinstance(file_pathes, list) and file_pathes != []:
-            base64_images = [self._encode_image(fp) for fp in file_pathes]
+    def talk_llm_vision_multiple(self, prompt:str = None, messages:list = [], file_paths:list = []) -> tuple[str, list]:
+        if isinstance(file_paths, list) and file_paths != []:
+            base64_images = [self._encode_image(fp) for fp in file_paths]
             image_parts = [{"mime_type": "image/jpeg", "data": base64.b64decode(img)} for img in base64_images]
             parts = []
             if prompt:
@@ -105,6 +105,6 @@ class GeminiClient(ILLMClient):
                 "parts": [{"text": prompt}]
             }
             messages.append(custom_message)
-        response = self.request_LLM(messages)
+        response = self.request_llm(messages)
         messages.append({'role':'assistant','parts': self.extract_answer_text_from_response(response)})
         return response, messages

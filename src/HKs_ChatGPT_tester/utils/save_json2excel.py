@@ -8,7 +8,7 @@
 import pandas as pd
 import openpyxl
 import datetime
-def save_json2excel(experiment_log,PATH_LOG_EXCELFILE,Date=datetime.datetime.now(),sheet_name=None):
+def save_json2excel(experiment_log,PATH_LOG_EXCELFILE,your_date=datetime.datetime.now(),sheet_name=None):
     user_sheet_name = sheet_name
     experiment_log_df = pd.DataFrame(experiment_log)
     order = 1
@@ -30,12 +30,12 @@ def save_json2excel(experiment_log,PATH_LOG_EXCELFILE,Date=datetime.datetime.now
             else:
                 with pd.ExcelWriter(PATH_LOG_EXCELFILE, engine='openpyxl', mode='a') as writer:
                     experiment_log_df.to_excel(
-                        writer, sheet_name=Date.strftime("%Y%m%d%H%M%S") + "-" + str(order))# 日時+order
+                        writer, sheet_name=your_date.strftime("%Y%m%d%H%M%S") + "-" + str(order))# 日時+order
                 print("Log is saved successfully to \""+PATH_LOG_EXCELFILE+"\"")
                 break
         except PermissionError as e:
             print(
-                "\033[31m"+"Error!!"+'\033[0m', " Close Excel file to save log. Do you wan to try again?(y/n)")
+                "\033[31m"+"Error!!"+'\033[0m', " Close Excel file to save log. Do you want to try again?(y/n)")
             while True:
                 _yn = input()
                 if _yn == "y":
@@ -52,7 +52,7 @@ def save_json2excel(experiment_log,PATH_LOG_EXCELFILE,Date=datetime.datetime.now
             order += 1
             continue
 
-def ask_save_json2excel(experiment_log,PATH_LOG_EXCELFILE,Date=datetime.datetime.now(),sheet_name=None):
+def ask_save_json2excel(experiment_log,PATH_LOG_EXCELFILE,date=datetime.datetime.now(),sheet_name=None):
     if sheet_name == None:
         user_sheet_name = sheet_name
     print("Save log? (y/n)")
@@ -79,12 +79,12 @@ def ask_save_json2excel(experiment_log,PATH_LOG_EXCELFILE,Date=datetime.datetime
                     else:
                         with pd.ExcelWriter(PATH_LOG_EXCELFILE, engine='openpyxl', mode='a') as writer:
                             experiment_log_df.to_excel(
-                                writer, sheet_name=Date.strftime("%Y%m%d%H%M%S") + "-" + str(order))# 日時+order
+                                writer, sheet_name=date.strftime("%Y%m%d%H%M%S") + "-" + str(order))# 日時+order
                         print("Log is saved successfully to \""+PATH_LOG_EXCELFILE+"\"")
                         break
                 except PermissionError as e:
                     print(
-                        "\033[31m"+"Error!!"+'\033[0m', " Close Excel file to save log. Do you wan to try again?(y/n)")
+                        "\033[31m"+"Error!!"+'\033[0m', " Close Excel file to save log. Do you want to try again?(y/n)")
                     while True:
                         _yn = input()
                         if _yn == "y":

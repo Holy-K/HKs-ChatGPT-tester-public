@@ -1,15 +1,15 @@
-@startuml HKsHKs_ChatGPT_tester
+@startuml hks_chatgpt_tester
 package src{
     package core{
-        class ChatGPTTester {
+        class ChatgptTester {
             - settings: ISettings
             - promptPresets: IPromptPresets
-            - lLMClient: ILLMClient
+            - lLMClient: ILlmClient
             - statusController: IStatusController
             - chatCommandProcessor: IChatCommandProcessor
             - tester_mode: str
-            + __init__(settings: ISettings, promptPresets: IPromptPresets, lLMClient: ILLMClient, statusController: IStatusController, chatCommandProcessor: IChatCommandProcessor)
-            - _start_chatGPT_tester()
+            + __init__(settings: ISettings, promptPresets: IPromptPresets, lLMClient: ILlmClient, statusController: IStatusController, chatCommandProcessor: IChatCommandProcessor)
+            - _start_chatgpt_tester()
             - _display_startup_message()
         }
         enum TesterMode {
@@ -23,11 +23,11 @@ package src{
             - statusController: IStatusController
             - settings: ISettings
             - promptPresets: IPromptPresets
-            - lLMClient: ILLMClient
-            - lLMView: ILLMTesterView
+            - lLMClient: ILlmClient
+            - lLMView: ILlmTesterView
             - dict_command: dict
             - order_dict_command: list
-            + __init__(statusController: IStatusController, settings: ISettings, promptPresets: IPromptPresets, lLMClient: ILLMClient, lLMView:ILLMTesterView)
+            + __init__(statusController: IStatusController, settings: ISettings, promptPresets: IPromptPresets, lLMClient: ILlmClient, lLMView:ILlmTesterView)
             + conversation_loop(): str
             - _handle_command_input(input_text: str)
             - _execute_command(command: str)
@@ -42,26 +42,26 @@ package src{
             - _input_message_preset()
         }
 
-        interface ILLMTesterView
-        class LLMTesterView implements ILLMTesterView{
+        interface ILlmTesterView
+        class LlmTesterView implements ILlmTesterView{
             + print_startup_message(settings:ISettings,dict_command:dict):None
-            + print_LLM_text(lLM_text,settings:ISettings, color_chatgpt="\033[32m", END='\033[0m'):None
+            + print_llm_text(lLM_text,settings:ISettings, color_chatgpt="\033[32m", END='\033[0m'):None
         }
 
-        ChatGPTTester "1" *-- "1" IChatCommandProcessor
-        ChatGPTTester "1" *-- "1" src.config.ISettings
-        ChatGPTTester "1" *-- "1" src.config.IPromptPreset
-        ChatGPTTester "1" *-- "1" src.config.IDependency
-        ChatGPTTester "1" o--"1" src.services.ILLMClient
-        ChatGPTTester "1" *-- "1" status.IStatusController
-        ChatGPTTester .. TesterMode
+        ChatgptTester "1" *-- "1" IChatCommandProcessor
+        ChatgptTester "1" *-- "1" src.config.ISettings
+        ChatgptTester "1" *-- "1" src.config.IPromptPreset
+        ChatgptTester "1" *-- "1" src.config.IDependency
+        ChatgptTester "1" o--"1" src.services.ILlmClient
+        ChatgptTester "1" *-- "1" status.IStatusController
+        ChatgptTester .. TesterMode
         ChatCommandProcessor "1" *-- "1" status.IStatusController
         ChatCommandProcessor ..> src.config.ISettings :Load
         ChatCommandProcessor ..> src.config.IPromptPreset:Load
-        ChatCommandProcessor "1" o--"1" src.services.ILLMClient
-        ChatCommandProcessor "1" *-- "1" src.core.ILLMTesterView
-        LLMTesterView ..> src.config.ISettings :Load
-
+        ChatCommandProcessor "1" o--"1" src.services.ILlmClient
+        ChatCommandProcessor "1" *-- "1" src.core.ILlmTesterView
+        LlmTesterView ..> src.config.ISettings :Load
+    }
 
         package status{
             interface IStatusPackage{
@@ -70,7 +70,7 @@ package src{
             class StatusPackageStandard implements IStatusPackage
             class StatusStandard{
                 - messages:list
-                - LLM_model: str
+                - llm_model: str
                 - temperature: float
                 - turn :int
                 - prompt: str
@@ -86,7 +86,7 @@ package src{
 
 
             interface IStatusController{
-            + __init__(settings: ISettings,statusPackage:IStatusPackage,lLMClient:ILLMClient)
+            + __init__(settings: ISettings,statusPackage:IStatusPackage,lLMClient:ILlmClient)
             + processing_at_end_of_turn(prompt:str, response:dict, messages:list, path_input_image:str, response_time:float):None
             - _update_status_every_turn_end():None
             - _update_status_after_record_log():None
@@ -99,7 +99,7 @@ package src{
             }
             class StatusControllerStandard implements IStatusController{
                 - statusPackage:IStatusPackage
-                - lLMClient:ILLMClient
+                - lLMClient:ILlmClient
                 - logs: list
                 - _set_status_package(statusPackage:IStatusPackage):None
             }
@@ -121,9 +121,9 @@ package src{
         class SettingsFromUserConfigJson implements ISettings{
             - openai_api_key: str
             - google_api_key:str
-            - LLM_model: str
-            - LLM_temperature: float
-            - LLM_max_tokens: int
+            - llm_model: str
+            - llm_temperature: float
+            - llm_max_tokens: int
             - path_log_excel_file: str
             - on_sound_notification: bool
             - path_sound_notification: str
@@ -139,28 +139,28 @@ package src{
     }
 
     package src.services{
-        interface ILLMClient{
+        interface ILlmClient{
             - settings: ISettings
             + __init__(settings: ISettings)
             + update_settings(settings: ISettings):None
-            + request_LLM(messages:list): dict
-            + talk_LLM(prompt:str, messages:list): tuple[str, list]
+            + request_llm(messages:list): dict
+            + talk_llm(prompt:str, messages:list): tuple[str, list]
             + extract_answer_text_from_response(response:dict):str
             + extract_prompt_tokens_from_response(response:dict):int
             + extract_answer_text_tokens_from_response(response:dict):int
             + extract_total_tokens_from_response(response:dict):int
         }
-        class ChatGPTClient implements ILLMClient{
+        class ChatgptClient implements ILlmClient{
             + select_file(path_initial_dir:str):str
             - _encode_image(image_path:str):str
         }
-        class GeminiClient implements ILLMClient{
+        class GeminiClient implements ILlmClient{
             + select_file(path_initial_dir:str):str
             - _encode_image(image_path:str):str
         }
 
-        ChatGPTClient ..> src.config.ISettings:Load
-        ChatGPTClient ..> src.utils.PrintThreadIconLoading:Use
+        ChatgptClient ..> src.config.ISettings:Load
+        ChatgptClient ..> src.utils.PrintThreadIconLoading:Use
         GeminiClient ..> src.config.ISettings:Load
         GeminiClient ..> src.utils.ExtractTextBetweenStrings:Use
     }

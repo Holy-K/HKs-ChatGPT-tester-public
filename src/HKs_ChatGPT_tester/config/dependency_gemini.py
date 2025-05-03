@@ -7,15 +7,14 @@ from injector import Injector
 # 自前ファイル--------------------------------------------------------
 from ..core.i_chat_command_processor import IChatCommandProcessor
 from ..core.chat_command_processor import ChatCommandProcessor
-from ..core.i_LLM_view import ILLMView
-from ..core.LLM_view import LLMView
+from ..core.i_llm_view import ILlmView
+from ..core.llm_view import LlmView
 from ..core.status.i_status_controller import IStatusController
 from ..core.status.i_status_package import IStatusPackage
 from ..core.status.status_controller_standard import StatusControllerStandard
 from ..core.status.status_package_standard import StatusPackageStandard
 
-from ..services.i_LLM_client import ILLMClient
-# from ..services.chatGPT_client import ChatGPTClient
+from ..services.i_llm_client import ILlmClient
 from ..services.gemini_client import GeminiClient
 
 from ..config.i_prompt_presets import IPromptPresets
@@ -37,16 +36,15 @@ class DependencyGemini(IDependency):
         binder.bind(IChatCommandProcessor, ChatCommandProcessor)
         binder.bind(IStatusController, StatusControllerStandard)
         binder.bind(IStatusPackage, StatusPackageStandard)
-        binder.bind(ILLMView, LLMView)
+        binder.bind(ILlmView, LlmView)
 
         # configパッケージの依存関係
-        settings = SettingsFromUserConfigJson ("src/HKs_ChatGPT_tester/user_config.json")
+        settings = SettingsFromUserConfigJson ("src/hks_chatgpt_tester/user_config.json")
         binder.bind(ISettings, settings)
         binder.bind(IPromptPresets, PromptPresets)
 
         # servicesパッケージの依存関係
-        # binder.bind(ILLMClient, ChatGPTClient)
-        binder.bind(ILLMClient, GeminiClient)
+        binder.bind(ILlmClient, GeminiClient)
 
     def resolve(self, cls):
         return self.injector.get(cls)

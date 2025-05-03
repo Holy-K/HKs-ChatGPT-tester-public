@@ -73,7 +73,7 @@ def save_dict_array_to_excel(dict_array, excel_path, save_date=datetime.datetime
         except ValueError:
             vol = vol+1
         except PermissionError:
-            print("\033[31m"+"Error!!"+'\033[0m', "Close Excel file to save log. Do you wan to try again?(y/n)")
+            print("\033[31m"+"Error!!"+'\033[0m', "Close Excel file to save log. Do you want to try again?(y/n)")
             while True:
                 retry = input()
                 if retry.lower() == "y":
@@ -85,4 +85,3 @@ def save_dict_array_to_excel(dict_array, excel_path, save_date=datetime.datetime
                     print("Please input correct key(y/n)")
                     continue
         continue
-

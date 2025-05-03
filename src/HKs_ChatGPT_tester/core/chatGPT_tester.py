@@ -1,5 +1,5 @@
 # ----------------------------------------------------------------------------
-# chatGPT_tester.py
+# chatgpt_tester.py
 # 概要：
 # 制作者：堀 和希
 # 早稲田大学　基幹理工学部　表現工学科　尾形研究室
@@ -16,20 +16,20 @@ from injector import inject
 # ---------------------------------------------------------------------
 
 # 自前ファイル---------------------------------------------------------
-from ..services.i_LLM_client import ILLMClient
+from ..services.i_llm_client import ILlmClient
 from ..config.i_prompt_presets import IPromptPresets
 from ..config.i_settings import ISettings
 from .status.i_status_controller import IStatusController
 from ..core.i_chat_command_processor import IChatCommandProcessor
 #------------------------------------------------------------------------
 
-class ChatGPTTester:
+class ChatgptTester:
     @inject
     def __init__(
         self,
         settings:ISettings,
         promptPresets:IPromptPresets,
-        lLMClient:ILLMClient,
+        lLMClient:ILlmClient,
         statusController: IStatusController,
         chatCommandProcessor: IChatCommandProcessor,
         )-> None:
@@ -45,9 +45,9 @@ class ChatGPTTester:
         self.tester_mode = "Standard"
 
         # ループの開始
-        self._start_chatGPT_tester()
+        self._start_chatgpt_tester()
 
-    def _start_chatGPT_tester(self):
+    def _start_chatgpt_tester(self):
         while True:
             if self.tester_mode == "Exit":
                 exit()

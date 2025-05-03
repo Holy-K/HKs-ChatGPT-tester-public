@@ -7,7 +7,7 @@ class StatusStandard:
 
         # GPT Experiment
         self.messages: list = []
-        self.LLM_model: str = ""
+        self.llm_model: str = ""
         self.temperature: float = None
         self.turn :int= 1
         self.prompt: str = ""
@@ -19,7 +19,7 @@ class StatusStandard:
         self.path_input_image: str = None
         self.response_time: float = 0.0
 
-    def get_date(self):
+    def get_date_time(self):
         return self.date
 
     def set_date(self, date):
@@ -35,11 +35,11 @@ class StatusStandard:
     def add_response2messages(self,response):
         self.messages.append(response)
 
-    def get_LLM_model(self):
-        return self.LLM_model
+    def get_llm_model(self):
+        return self.llm_model
 
-    def set_LLM_model(self, LLM_model):
-        self.LLM_model = LLM_model
+    def set_llm_model(self, llm_model):
+        self.llm_model = llm_model
 
     def get_temperature(self):
         return self.temperature

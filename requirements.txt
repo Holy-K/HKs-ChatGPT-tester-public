@@ -1,11 +1,1 @@
-openai
-pandas
-openpyxl
-Thread
-playsound==1.2.2
-styleframe
-python-dotenv
-langchain
-langchain-community
-injector
-google.generativeai
+-r src/hks_chatgpt_tester/requirements.txt
