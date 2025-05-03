@@ -48,13 +48,12 @@ class ChatCommandProcessor():
             self.lLMView.print_turnBar(self.statusController.statusPackage.statusStandard.get_turn())
             print("【You】")
             input_text = input()
-            self._handle_command_input(input_text)#TODOデバッグが終わったら戻す
-            # try:
-            #     self._handle_command_input(input_text)
-            # except Exception as e:
-            #     print("\033[31m" + "Error: " + str(e) + '\033[0m')
-            #     print("Error is occurred in conversation_loop()")
-            #     self._ask_save_logs2excel()
+            try:
+                self._handle_command_input(input_text)
+            except Exception as e:
+                print("\033[31m" + "Error: " + str(e) + '\033[0m')
+                print("Error is occurred in conversation_loop()")
+                self._ask_save_logs2excel()
         return self.tester_mode_change
 
     def _handle_command_input(self, input_text):
