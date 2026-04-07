@@ -2,7 +2,7 @@
 # Hks-chatgpt-tester-public
 
 ## 注意
-研究室内で使用している大規模言語モデル（LLM）を用いた実験ツールの就活用限定公開版です。
+実験用に制作した大規模言語モデル（LLM）を用いた実験ツールの公開用限定版です。
 
 <span style="color:red; text-decoration:underline;">使用にはGoogle API Keyを記入したuser_config.jsonの作成が必須です。</span>
 
